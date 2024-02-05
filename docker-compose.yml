@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  demo-server:
+    build: .
+    image: demo-server
+    ports:
+      - "25565:25565"
+      - "19132:19132"
+    networks:
+      - app_network
+    volumes:
+      - type: bind
+        source: ./config.example.yml
+        target: /app/config.yml
+        read_only: true
+
+networks:
+  app_network:
+    driver: bridge
+
